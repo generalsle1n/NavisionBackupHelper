@@ -1,13 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-NavisionBackupHelper-5875aeea-70a7-4ac1-bc57-6777305f6ae2</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="deadlock-dotnet-sdk" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="7.0.0" />
+    <PackageReference Include="Quartz" Version="3.6.2" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.6.2" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.2" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
