@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using deadlock_dotnet_sdk;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,6 +18,7 @@ namespace NavisionBackupHelper
         private bool _unlockFiles = false;
         private List<string> _filesToUnlock = new List<string>();
         private List<string> _folderToUnlock = new List<string>();
+        private DeadLock _dl = new DeadLock();
 
         public BackupJob(ILogger<BackupJob> logger, IConfiguration config)
         {
@@ -37,7 +39,6 @@ namespace NavisionBackupHelper
                 _filesToUnlock = _config.GetSection("NavisionBackup:Unlock:UnlockFiles").Get<List<string>>();
                 _folderToUnlock = _config.GetSection("NavisionBackup:Unlock:UnlockFolder").Get<List<string>>();
             }
-
         }
 
         public async Task Execute(IJobExecutionContext context)
@@ -46,6 +47,11 @@ namespace NavisionBackupHelper
             {
                 try
                 {
+                    if (_unlockFiles)
+                    {
+                        _dl.Unlock(_filesToUnlock.ToArray());
+                        _dl.Unlock(_folderToUnlock.ToArray());
+                    }
                     _isRunning = true;
                     Process _tempProcess = _backup;
                     _tempProcess.Start();
