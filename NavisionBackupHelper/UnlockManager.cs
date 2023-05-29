@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace NavisionBackupHelper
 {
-    internal class UnlockManager
+    public class UnlockManager
     {
+        private ILogger<UnlockManager> _logger;
+
+        public UnlockManager(ILogger<UnlockManager> logger)
+        {
+            _logger = logger;
+        }
     }
 }
