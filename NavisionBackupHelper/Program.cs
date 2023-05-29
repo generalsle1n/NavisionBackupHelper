@@ -37,8 +37,6 @@ IHost host = Host.CreateDefaultBuilder(args)
                         _tempConfig.GetValue<int>("NavisionBackup:StartMinute"))
                         );
                 });
-                //Just For Development
-                trigger.StartNow();
                 trigger.ForJob(MainJobKey);
             });
         });
